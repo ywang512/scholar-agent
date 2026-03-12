@@ -1,0 +1,42 @@
+[project]
+name = "scholar-agent"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = []
+
+[dependency-groups]
+ml = []
+app = []
+dev = [
+    "pytest>=9.0.2",
+    "pytest-cov>=7.0.0",
+    "ruff>=0.15.5",
+    "pre-commit>=4.5.1",
+    "jupyter>=1.1.1",
+    "pyright>=1.1",
+]
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+target-version = "py314"
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+    "E", "F", "I", "N", "W", "UP", "B", "SIM", "RUF",
+    "A", "S", "C4", "PTH", "PERF", "RET", "PIE",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short --strict-markers"
+markers = [
+    "slow: long-running tests (model training, large data)",
+    "integration: tests that hit external APIs",
+]
+filterwarnings = [
+    "error",
+    "ignore::DeprecationWarning",
+]

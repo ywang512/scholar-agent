@@ -1,0 +1,29 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.5  # Ruff version.
+    hooks:
+      - id: ruff-check
+        args: ["--fix", "--show-fixes", "--exit-non-zero-on-fix"]
+      - id: ruff-format
+
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.10.9  # uv version.
+    hooks:
+      - id: uv-lock
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+        args: ["--maxkb=5120"]  # 5 MB limit
+      - id: check-json
+      - id: check-toml
+      - id: check-xml
+        types: ["file", "non-executable", "text"]
+        files: \.(recipe|plist|xml)$
+      - id: check-yaml
+      - id: debug-statements
+      - id: end-of-file-fixer
+      - id: pretty-format-json
+        args: ["--autofix", "--indent=2", "--no-sort-keys"]
+      - id: trailing-whitespace

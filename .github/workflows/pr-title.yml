@@ -1,0 +1,25 @@
+name: Lint PR
+
+on:
+  pull_request_target:
+    types: [opened, reopened, edited, synchronize]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: amannn/action-semantic-pull-request@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # default allowed types: https://github.com/commitizen/conventional-commit-types/blob/master/index.json
+          requireScope: false
+          subjectPattern: ^(?![A-Z]).+$
+          subjectPatternError: >
+            The subject "{subject}" found in the pull request title "{title}"
+            should start with a lowercase letter.
+            Example: "feat: add search endpoint"
+          wip: true
