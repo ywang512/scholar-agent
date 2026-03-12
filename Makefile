@@ -1,17 +1,15 @@
 .PHONY: install lint test test-cov clean help
 
 install: ## Install all dependencies
-	uv sync --all-groups
+	uv sync --frozen --all-groups
 	uv run pre-commit install
 
 lint: ## Run linter
 	uv run ruff check scholar/ tests/
+	uv run ruff format --check scholar/ tests/
 
 test: ## Run tests
 	uv run pytest
-
-test-cov: ## Run tests with coverage
-	uv run pytest --cov=scholar --cov-report=term-missing
 
 clean: ## Clean build artifacts
 	rm -rf build/ dist/ .eggs/ *.egg-info/ .pytest_cache/ .ruff_cache/ .coverage htmlcov/
