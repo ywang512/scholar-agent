@@ -6,7 +6,6 @@ on:
 
 permissions:
   pull-requests: read
-  statuses: write
 
 jobs:
   lint:
@@ -23,4 +22,3 @@ jobs:
             The subject "{subject}" found in the pull request title "{title}"
             should start with a lowercase letter.
             Example: "feat: add search endpoint"
-          wip: true
